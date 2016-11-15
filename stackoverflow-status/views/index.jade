@@ -1,0 +1,19 @@
+extends layout
+
+
+block content
+  h1 Stackoverflow Status
+
+  p= 'Questions without accepted answer, tagged any of: ' + search
+  hr
+
+  each q in questions
+    div
+      - qdate = new Date(q.value.creation_date * 1000)
+      - var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
+      - qprettydate = qdate.getDate() + ' ' + monthNames[qdate.getMonth()] + ' ' + qdate.getFullYear();
+      a(href=q.value.link, target="_blank")=q.value.title
+      span= ' - ' + qprettydate
+      br
+      span= 'Answers: ' + q.value.answer_count + ' Tagged: ' + q.value.tags.toString()
+      hr
