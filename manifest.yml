@@ -1,0 +1,17 @@
+---
+declared-services:
+  ljsdp-cloudant-service:
+    label: cloudantNoSQLDB
+    plan: Lite
+applications:
+- name: stackoverflow-status
+  memory: 512M
+  instances: 1
+  domain: mybluemix.net
+  random-route: true
+  disk_quota: 1024M
+  command: npm start
+  path: ./stackoverflow-status
+  services:
+  - ljsdp-cloudant-service
+
