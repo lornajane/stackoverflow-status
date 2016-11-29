@@ -1,8 +1,11 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+.questiontitle {
+  color: #56A8FD;
+  /*font-weight: 500;*/
 }
 
-a {
-  color: #00B7FF;
+.tag, .answercount {
+  color: white;
+  font-size: 9pt;
 }
+
+.date { font-size: 9pt; font-style: italic}
