@@ -8,10 +8,23 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var Cloudant = require('cloudant');
+
 var cloudant_username = process.env.cloudant_username;
 var cloudant_password = process.env.cloudant_password;
+
+// check if application is being run in cloud environment
+if (process.env.VCAP_SERVICES) {
+  var services = JSON.parse(process.env.VCAP_SERVICES);
+
+  // look for a service starting with 'cloudantNoSQLDB'
+  if (services['cloudantNoSQLDB']) {
+    var creds = services['cloudantNoSQLDB'][0]['credentials'];
+    cloudant_username = creds.username;
+    cloudant_password = creds.password;
+  }
+}
 var cloudant = Cloudant({account:cloudant_username, password: cloudant_password});
-// console.log(cloudant);
+// console.log('CLOUDANT:');console.log(cloudant);
 
 var index = require('./routes/index');
 

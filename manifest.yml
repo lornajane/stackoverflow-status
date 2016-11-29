@@ -8,6 +8,7 @@ applications:
   memory: 512M
   instances: 1
   domain: mybluemix.net
+  route: stackoverflow-status
   random-route: false
   disk_quota: 1024M
   command: npm start
