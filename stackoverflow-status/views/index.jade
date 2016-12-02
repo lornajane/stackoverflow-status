@@ -7,15 +7,15 @@ block content
         h1 Stackoverflow Status
 
     - var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
-    - var searchwords = search.split(',');
+    - var searchwords = search.split(',').map(Function.prototype.call, String.prototype.trim);
 
-    div.row
+    div.row.so-questions
       div.col.s12
         p
           span Questions without an accepted answer, tagged any of: 
         p
           each w in searchwords
-            a.tag.chip.blue(href='')= w
+            a.so-tag.chip.blue(onclick='javascript:toggleTagVisibility(this)')= w
 
       div.row
         each q in questions
@@ -23,7 +23,7 @@ block content
           - qprettydate = qdate.getDate() + ' ' + monthNames[qdate.getMonth()] + ' ' + qdate.getFullYear();
 
           div.col.s12.m6.l4
-            div.card.sticky-action.small.question
+            div.card.notdisplayed.sticky-action.small.question
               div.card-content
                 i.material-icons.right.blue-text.activator= "more_vert"
                 h6.activator.questiontitle
@@ -43,5 +43,5 @@ block content
                   i.material-icons.right= "close"
                 div.grey-text
                   :verbatim !{q.value.body}
-
-      
+    
+  
