@@ -8,14 +8,11 @@ $('.so-tag').each(function (stidx) {
 });
 
 function updateCardVisibility() {
-    $('.question').each(function (qidx) {
+    $('.questioncol').each(function (qidx) {
         showme = false;
         $(this).find('.tag').each(function (tidx) { // get question's tags
-            tagtext = $(this).text();
-            // check if any tag is in list of active tags
-            if (so_tags.indexOf(tagtext) >= 0) {
-                showme = true;
-                // if so, show it
+            if (so_tags.indexOf($(this).text()) >= 0) { // check if any tag is in list of active tags
+                showme = true; // if so, show it
                 return false;
             }
         });
@@ -24,7 +21,6 @@ function updateCardVisibility() {
         } else {
             $(this).addClass('notdisplayed');
         }
-        // console.log( this.offsetHeight );
     });
 }
 

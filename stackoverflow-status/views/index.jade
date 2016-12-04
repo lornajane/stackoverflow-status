@@ -6,34 +6,30 @@ block content
       div.col.s12
         h1 Stackoverflow Status
 
-    - var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
-    - var searchwords = search.split(',').map(Function.prototype.call, String.prototype.trim);
+        h5.subhead Questions without an accepted answer, tagged any of: 
 
-    div.row.so-questions
-      div.col.s12
-        p
-          span Questions without an accepted answer, tagged any of: 
+        - var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
+        - var searchwords = search.split(',').map(Function.prototype.call, String.prototype.trim);
         p
           each w in searchwords
-            a.so-tag.chip.blue(onclick='javascript:toggleTagVisibility(this)')= w
+            a.so-tag.waves-effect.waves-light.btn.blue(onclick='javascript:toggleTagVisibility(this)')= w
 
-      div.row
+      div.row.so-questions
         each q in questions
           - qdate = new Date(q.value.creation_date * 1000)
           - qprettydate = qdate.getDate() + ' ' + monthNames[qdate.getMonth()] + ' ' + qdate.getFullYear();
 
-          div.col.s12.m6.l4
-            div.card.notdisplayed.sticky-action.small.question
+          div.col.s12.m6.l4.questioncol.notdisplayed
+            div.card.sticky-action.small.question.z-depth-4
               div.card-content
-                i.material-icons.right.blue-text.activator= "more_vert"
-                h6.activator.questiontitle
+                i.material-icons.right.pink-text.activator= "more_vert"
+                h5.activator.questiontitle.pink-text
                   :verbatim !{q.value.title}
                 p.grey-text.date= qprettydate
-                p
-                  hr
+                hr.blue-text
                 div.tags 
                   each tag in q.value.tags
-                    span.tag.chip.small.grey= tag.toString()
+                    span.tag.chip.small.blue= tag.toString()
               div.card-action
                 a.pink-text(href=q.value.link, target="_blank" title="View on SO")
                   i.material-icons.small= "open_in_browser"

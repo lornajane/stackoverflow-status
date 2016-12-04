@@ -1,6 +1,12 @@
+.so-tag {
+  margin-right: 4px;
+  text-transform: lowercase;
+}
+
 .questiontitle {
-  color: #56A8FD;
-  /*font-weight: 500;*/
+  /*color: #56A8FD;*/
+  font-weight: 300;
+  font-style: italic;
 }
 
 .tag, .answercount {
@@ -10,5 +16,21 @@
 
 .date { font-size: 9pt; font-style: italic}
 
-.displayed { display: inherit; }
-.notdisplayed { display: none; }
+.displayed { display: block; }
+.notdisplayed {display: none; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 300;
+  color: #182C3B;
+}
+h1, h2, h3 {
+  font-weight: 300;
+  font-style: italic;
+}
+h1 {
+  text-transform: uppercase;
+}
+.subhead {
+  font-weight: 600;
+  font-size: 24pt;
+}
