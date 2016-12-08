@@ -1,44 +1,45 @@
 extends layout
 
 block content
-  div.container
-    div.row
-      div.col.s12
-        h1 Stackoverflow Status
+  div.row
+    div.col.s12
+      h5.subhead Questions without an accepted answer, tagged any of: 
 
-        h5.subhead Questions without an accepted answer, tagged any of: 
+      - var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
+      - var searchwords = search.split(',').map(Function.prototype.call, String.prototype.trim);
+      p
+        each w in searchwords
+          a.so-tag.waves-effect.waves-light.btn.blue(onclick='javascript:toggleTagVisibility(this)')= w
+      hr
 
-        - var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
-        - var searchwords = search.split(',').map(Function.prototype.call, String.prototype.trim);
-        p
-          each w in searchwords
-            a.so-tag.waves-effect.waves-light.btn.blue(onclick='javascript:toggleTagVisibility(this)')= w
-        hr
+  div.row.so-questions
+    each q in questions
+      - qdate = new Date(q.value.creation_date * 1000)
+      - qprettydate = qdate.getDate() + ' ' + monthNames[qdate.getMonth()] + ' ' + qdate.getFullYear();
 
-      div.row.so-questions
-        each q in questions
-          - qdate = new Date(q.value.creation_date * 1000)
-          - qprettydate = qdate.getDate() + ' ' + monthNames[qdate.getMonth()] + ' ' + qdate.getFullYear();
+      - relurl = "/related?title=" + q.value.title + "&tags="
+      each tag in q.value.tags
+        - relurl += tag + ";"
 
-          div.col.s12.m6.l4.questioncol.notdisplayed
-            div.card.sticky-action.small.question.z-depth-4
-              div.card-content
-                i.material-icons.right.activator(role="button")= "more_vert"
-                h5.activator.questiontitle
-                  :verbatim !{q.value.title}
-                p.grey-text.date= qprettydate
-                hr.blue-text
-                div.tags 
-                  each tag in q.value.tags
-                    span.tag.chip.small.blue= tag.toString()
-              div.card-action
-                a.pink-text(href=q.value.link, target="_blank" title="View on SO")
-                  i.material-icons.small= "open_in_browser"
-                span.answercount.badge.right.white-text.pink(title="answers")= q.value.answer_count
-              div.card-reveal
-                span.card-title.grey-text= "Details"
-                  i.material-icons.right(role="button")= "close"
-                div.grey-text
-                  :verbatim !{q.value.body}
-    
-  
+      div.col.s12.m6.l4.questioncol.notdisplayed
+        div.card.sticky-action.small.question.z-depth-4
+          div.card-content
+            i.material-icons.right.activator(role="button")= "more_vert"
+            h5.activator.questiontitle
+              :verbatim !{q.value.title}
+            p.grey-text.date= qprettydate
+            hr.blue-text
+            div.tags 
+              each tag in q.value.tags
+                span.tag.chip.small.blue= tag.toString()
+          div.card-action
+            a.pink-text(href=q.value.link, target="_blank" title="View on SO")
+              i.material-icons.small= "open_in_browser"
+            a.pink-text(href=relurl, title="Related questions")
+              i.material-icons.small= "question_answer"
+            span.answercount.badge.right.white-text.pink(title="answers")= q.value.answer_count
+          div.card-reveal
+            span.card-title.grey-text= "Details"
+              i.material-icons.right(role="button")= "close"
+            div.grey-text
+              :verbatim !{q.value.body}

@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  div.row
+    div.col.s12
+      div= "Questions related to:"
+      h5.subhead= title 
+      
+    hr
+
+  div.row.so-related
+    each q in relatedqs.items
+      div.col.s12.m6.l4.relcol
+        div.card.small.z-depth-4.relq
+          div.card-content
+            h5.questiontitle
+              a(href=q.link, target="_blank" title="View on SO")
+                :verbatim !{q.title}
+            div.tags 
+              each tag in q.tags
+                span.tag.chip.small.grey= tag.toString()
+          div.card-action
+            a.pink-text(href=q.link, target="_blank" title="View on SO")
+              i.material-icons.small= "open_in_browser"
+            span.answercount.badge.right.white-text.pink(title="answers")= q.answer_count
+
