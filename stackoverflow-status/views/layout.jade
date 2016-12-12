@@ -10,7 +10,10 @@ html
       div.row
         div.col.s12
           div.right= "content from "
-            a(href="http://stackoverflow.com/" target="_blank")= "StackOverflow" 
+            a(href="http://stackoverflow.com/" target="_blank")= "StackOverflow "
+            span
+              a(href="/", title="Home")
+                i.material-icons.right= "home"
           h1 Stackoverflow Status
 
       block content
