@@ -3,6 +3,11 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+	var tags = null;
+	if (req.params.tags) {
+		tags = req.params.tags.split('|');
+	}
+
   var cloudant = req.cloudant;
 
   var pipedb = cloudant.db.use('pipe_db');
@@ -25,7 +30,7 @@ router.get('/', function(req, res, next) {
 		}
 		// console.log(questions)
 		// pass data to view
-		res.render('index', { questions: questions, search: search });
+		res.render('index', { questions: questions, search: search, tags: tags });
 	  });
     }
   });
